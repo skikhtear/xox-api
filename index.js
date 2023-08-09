@@ -105,6 +105,15 @@ async function run() {
                     Your unique code is:${uniqueCode} `
                 };
 
+                const codeData = {
+                    uniqueCode: uniqueCode
+                  };
+              
+                  // Update the existing user data with the uniqueCode
+                  await rider.updateOne({ email: email }, { $set: codeData });
+              
+                  console.log('Unique code saved to the user in the database!');
+
                 await transporter.sendMail(mailOptions);
                 console.log('Confirmation email sent!');
             } catch (error) {
@@ -156,8 +165,18 @@ async function run() {
                     Your unique code is:${uniqueCode} `
                 };
 
+                const codeData = {
+                    uniqueCode: uniqueCode
+                  };
+              
+                  // Update the existing user data with the uniqueCode
+                  await ambassador.updateOne({ email: email }, { $set: codeData });
+              
+                  console.log('Unique code saved to the user in the database!');
+
                 await transporter.sendMail(mailOptions);
                 console.log('Confirmation email sent!');
+
             } catch (error) {
                 console.error('Error sending confirmation email:', error);
             }
@@ -364,18 +383,17 @@ async function run() {
                 name: signup.name,
                 mobile: signup.mobile,
                 email: signup.email,
-                unic_code: signup.invite_code,
                 password: signup.password,
             }
 
-            const alreadysignup = await rider.find(query).toArray();
+            const alreadysignup = await ambassador.find(query).toArray();
 
             if (alreadysignup.length) {
                 const message = `You already have a signup ${signup.email}`
                 return res.send({ acknowledged: false, message })
             }
 
-            const result = await rider.insertOne(signup);
+            const result = await ambassador.insertOne(signup);
             res.send(result)
         })
 
@@ -634,3 +652,58 @@ app.listen(port, () => console.log(`Xox Ride server running on ${port}`))
 
 
 
+// const { MongoClient } = require('mongodb');
+// const nodemailer = require('nodemailer');
+// const express = require('express');
+// const app = express();
+
+// // ... (your existing code)
+
+// app.post('/ambassador-email', async (req, res) => {
+//   // Process the payment and generate a unique code
+//   const name = req.body.name;
+//   const mobile = req.body.mobile;
+//   const email = req.body.email;
+  
+//   // Generate the uniqueCode
+//   function generateUniqueCode(length = 6) {
+//     const digits = '0123456789';
+//     let code = '';
+
+//     for (let i = 0; i < length; i++) {
+//       const randomIndex = Math.floor(Math.random() * digits.length);
+//       code += digits.charAt(randomIndex);
+//     }
+
+//     return code;
+//   }
+//   const uniqueCode = generateUniqueCode(); // Generate the unique code
+
+//   try {
+//     // ... (your existing code for sending the confirmation email)
+
+//     // Save the uniqueCode to the database
+//     const uri = 'mongodb://localhost:27017'; // Update with your MongoDB connection string
+//     const client = new MongoClient(uri);
+
+//     await client.connect();
+//     const database = client.db('your-db-name'); // Replace 'your-db-name' with your actual database name
+//     const usersCollection = database.collection('users');
+
+//     const codeData = {
+//       uniqueCode: uniqueCode
+//     };
+
+//     // Update the existing user data with the uniqueCode
+//     await usersCollection.updateOne({ email: email }, { $set: codeData });
+
+//     console.log('Unique code saved to the user in the database!');
+    
+//     await client.close();
+//   } catch (error) {
+//     console.error('Error saving the unique code to the database:', error);
+//   }
+
+//   // Send the response back to the client
+//   res.send(uniqueCode);
+// });
