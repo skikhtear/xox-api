@@ -88,8 +88,8 @@ async function run() {
                     // Example configuration for Gmail:
                     service: 'gmail',
                     auth: {
-                        user: 'xoxride@gmail.com',
-                        pass: 'vwxtkxfgeyfllgve'
+                        user: 'xoxrides@gmail.com',
+                        pass: 'avxpcdhwhtjdmjce'
                     }
                 });
 
@@ -149,8 +149,8 @@ async function run() {
                     // Example configuration for Gmail:
                     service: 'gmail',
                     auth: {
-                        user: 'xoxride@gmail.com',
-                        pass: 'vwxtkxfgeyfllgve'
+                        user: 'xoxrides@gmail.com',
+                        pass: 'avxpcdhwhtjdmjce'
                     }
                 });
 
@@ -213,8 +213,8 @@ async function run() {
                     // Example configuration for Gmail:
                     service: 'gmail',
                     auth: {
-                        user: 'xoxride@gmail.com',
-                        pass: 'vwxtkxfgeyfllgve'
+                        user: 'xoxrides@gmail.com',
+                        pass: 'avxpcdhwhtjdmjce'
                     }
                 });
 
@@ -265,8 +265,8 @@ async function run() {
                     // Example configuration for Gmail:
                     service: 'gmail',
                     auth: {
-                        user: 'xoxride@gmail.com',
-                        pass: 'vwxtkxfgeyfllgve'
+                        user: 'xoxrides@gmail.com',
+                        pass: 'avxpcdhwhtjdmjce'
                     }
                 });
 
@@ -516,7 +516,8 @@ async function run() {
                 detailsField1: addpackage.detailsField1,
                 detailsField2: addpackage.detailsField2,
                 detailsField3: addpackage.detailsField3,
-                detailsField4: addpackage.detailsField4
+                detailsField4: addpackage.detailsField4,
+                payment: addpackage.payment,
             }
 
             const result = await package.insertOne(addpackage);
@@ -528,6 +529,13 @@ async function run() {
             const query = {_id: ObjectId(id)};
             const rider_info = await rider.find(query).toArray();
             res.send(rider_info)
+
+        });
+        app.get('/package/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const package_info = await package.find(query).toArray();
+            res.send(package_info)
 
         });
 
