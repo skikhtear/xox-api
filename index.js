@@ -95,7 +95,7 @@ async function run() {
 
                 const mailOptions = {
                     from: 'xoxride@gmail.com',
-                    to: `${email},<xoxride@gmail.com>`,
+                    to: `${email},<xoxrides@gmail.com>`,
                     subject: 'Rider Payment Confirmation',
                     text: `
                     name:${name},
@@ -156,7 +156,7 @@ async function run() {
 
                 const mailOptions = {
                     from: 'xoxride@gmail.com',
-                    to: `${email},<xoxride@gmail.com>`,
+                    to: `${email},<xoxrides@gmail.com>`,
                     subject: 'Ambassador signup successfull',
                     text: ` 
                     name:${name},
@@ -220,7 +220,7 @@ async function run() {
 
                 const mailOptions = {
                     from: 'xoxride@gmail.com',
-                    to: `${email},<xoxride@gmail.com>`,
+                    to: `${email},<xoxrides@gmail.com>`,
                     subject: 'Driver signup successfull',
                     text: `name:${name},
                     mobile:${mobile},
@@ -272,7 +272,7 @@ async function run() {
 
                 const mailOptions = {
                     from: 'xoxride@gmail.com',
-                    to:`${email},<xoxride@gmail.com>`,
+                    to:`${email},<xoxrides@gmail.com>`,
                     subject: 'Contact request',
                     text: 
                     `name:${name},
